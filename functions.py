@@ -1,5 +1,30 @@
 import numpy as np
 
-def entropy(px):
-    return -np.sum(px * np.log2(px))
-     
+#def entropy(px):
+#    return -np.sum(px * np.log2(px))
+
+def entropy(labels):
+    ent = 0
+    i = 0
+    j = 0
+    percents : [int]
+    for x in labels:
+        outputs = [str]
+        found : False
+        j = 0
+        for y in outputs:
+            if(y == x):
+                percents[j]+=1
+                j+=1
+                found = True
+                break
+        if(found == False): 
+            outputs[i] = x
+            percents[i] = 1
+            i+=1
+
+    for x in percents:
+        ent+=(x/len(labels))*np.log2(x/len(labels))
+            
+    return ent
+    

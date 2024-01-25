@@ -4,8 +4,7 @@ from functions import entropy
 
 
 print('start')
-df = pd.read_csv('dataset/feature_train.csv')
-
+df = pd.read_csv('C:\\Users\\ASUS\\Desktop\dsFinal\\Decision-Tree\dataset\\feature_test.csv')
 print(df.head())
 
 duplicate_rows_data = df[df.duplicated()]
@@ -17,3 +16,7 @@ for column in df.columns:
     print(f"{column}: {num_distinct_values} distinct values")
 
 print('end')
+
+h = ['m', 'm', 'm', 'f']
+
+print(entropy(h))
