@@ -1,13 +1,15 @@
 import numpy as np
 
+#def entropy(px):
+#    return -np.sum(px * np.log2(px))
+
 def entropy(labels):
     ent = 0
     i = 0
     j = 0
     outputs = []
     percents = []
-
-    print(labels)    
+    
     for x in labels:
         found = False
         j = 0
@@ -15,15 +17,14 @@ def entropy(labels):
             if y == x:
                 percents[j] += 1
                 found = True
+                j += 1
                 break
-            j += 1
-        if not found:
+            
+        if found == False:
             outputs.append(x)
             percents.append(1)
             i += 1
-
     for x in percents:
-        px = x / len(labels)
-        ent += px * np.log2(px)
+        ent += (x / len(labels)) * np.log2(x / len(labels))
             
     return -ent  
