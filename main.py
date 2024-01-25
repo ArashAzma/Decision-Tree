@@ -4,7 +4,7 @@ from functions import entropy
 
 
 print('start')
-df = pd.read_csv('C:\\Users\\ASUS\\Desktop\dsFinal\\Decision-Tree\dataset\\feature_test.csv')
+df = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_train.csv')
 print(df.head())
 
 duplicate_rows_data = df[df.duplicated()]

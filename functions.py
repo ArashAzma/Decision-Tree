@@ -7,24 +7,24 @@ def entropy(labels):
     ent = 0
     i = 0
     j = 0
-    percents : [int]
+    outputs = []
+    percents = []
+    
     for x in labels:
-        outputs = [str]
-        found : False
+        found = False
         j = 0
         for y in outputs:
-            if(y == x):
-                percents[j]+=1
-                j+=1
+            if y == x:
+                percents[j] += 1
                 found = True
                 break
-        if(found == False): 
-            outputs[i] = x
-            percents[i] = 1
-            i+=1
+            j += 1
+        if not found:
+            outputs.append(x)
+            percents.append(1)
+            i += 1
 
     for x in percents:
-        ent+=(x/len(labels))*np.log2(x/len(labels))
+        ent += (x / len(labels)) * np.log2(x / len(labels))
             
-    return ent
-    
+    return -ent  
