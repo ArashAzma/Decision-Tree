@@ -17,6 +17,7 @@ class Tree:
         for x in labels:
             found : False
             for y in outputs:
+                j = 0
                 if(y == x):
                     percents[j]+=1
                     j+=1
@@ -28,12 +29,20 @@ class Tree:
                 i+=1
 
         for x in percents:
-            ent+=(x/len(labels))*np.log2(x/len(labels))
+            ent+=((x/len(labels))*np.log2(x/len(labels)))
             
         return ent
     
     def iGain(EParent, WChildren,EChildren):
-        g : any
+        g = 0
+        i = 0
+        
+        for x in WChildren:
+            g+=x*EChildren[i]
+            i+=1
+
+        g = EParent - g
+        
         return g
 
     
