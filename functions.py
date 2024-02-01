@@ -30,6 +30,7 @@ def entropy(labels):
 
 
 
+
 def informationGain(data, labels):
     dataTypes = data.unique()
 
@@ -43,20 +44,19 @@ def informationGain(data, labels):
     dataEntropy = []
     i = 0
     
-    
     #finding child entropies and number of each data type
     
     for x in range (0,len(dataTypes)-1) :
         datalabels = []
-        for y in range (0, len (data) - 1):         
-            if(data[y] == dataTypes[x]):
+        for y in range (0, len (dataArray) - 1):         # 0 ya 1 ro motmaen nistm (bastegi dare)
+            if(dataArray[y] == dataTypes[x]):
                 percents[x] += 1
-                datalabels.append(labels[y])
+                datalabels.append(labelsArray[y])
         dataEntropy[x] = entropy(datalabels)
     
     ###
         
     for x in range (0, len(dataTypes)-1) :
-        g-=(percents[x]/len(labels))*dataEntropy[x]
+        g-=(percents[x]/len(labelsArray))*dataEntropy[x]
     
     return g
