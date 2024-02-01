@@ -1,4 +1,5 @@
 from Tree import Tree
+from decisionTreeClassifier import decisionTreeClassifier
 import pandas as pd 
 
 
@@ -8,5 +9,8 @@ dfLabel = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\data
 
 data = dfFeature
 label = dfLabel['Diabetes_012']
-tree = Tree(10)
-tree.createTree(data, label)
+# tree = Tree(10)
+# tree.createTree(data, label)
+
+dsc = decisionTreeClassifier(data, label)
+dsc.predict(data)

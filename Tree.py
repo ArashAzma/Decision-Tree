@@ -42,9 +42,8 @@ class Tree:
             return
 
         bestSplitColumnName = self.best_split(data, label)
-        print('bestSplitColumnName', bestSplitColumnName)
         uniqueValues = data[bestSplitColumnName].unique()
-
+        
         for value in uniqueValues:
             subset_indices = data[bestSplitColumnName] == value
             subsetArray = np.array(subset_indices)
