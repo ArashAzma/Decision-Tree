@@ -7,7 +7,6 @@ def entropy(labels):
     outputs = []
     percents = []
 
-    print(labels)    
     for x in labels:
         found = False
         j = 0
@@ -27,3 +26,15 @@ def entropy(labels):
         ent += px * np.log2(px)
             
     return -ent  
+
+def informationGain(EParent, WChildren,EChildren):
+    g = 0
+    i = 0
+    
+    for x in WChildren:
+        g+=x*EChildren[i]
+        i+=1
+
+    g = EParent - g
+    
+    return g

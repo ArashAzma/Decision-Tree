@@ -1,59 +1,62 @@
-import TNode
+from TNode import TNode
 import numpy as np
+from functions import entropy, informationGain
+
 
 class Tree:
-    depth : any
-    root =TNode()    
-    #def getDepth():
-     #   return depth
+    # constructure
+    def __init__(self, depth=None):
+        self.depth = depth
+        self.root = TNode()
 
+    @staticmethod
     def Entropy(labels):
-        ent = 0
-        i = 0
-        j = 0
-        outputs : {}
-        percents : {}
-
-        for x in labels:
-            found : False
-            for y in outputs:
-                j = 0
-                if(y == x):
-                    percents[j]+=1
-                    j+=1
-                    found = True
-                    break
-            if(found == False):
-                outputs[i] = x
-                percents[i] = 1
-                i+=1
-
-        for x in percents:
-            ent+=((x/len(labels))*np.log2(x/len(labels)))
-            
-        return ent
+       return entropy(labels)
     
+    @staticmethod
     def iGain(EParent, WChildren,EChildren):
-        g = 0
-        i = 0
-        
-        for x in WChildren:
-            g+=x*EChildren[i]
-            i+=1
-
-        g = EParent - g
-        
-        return g
+        return informationGain(EParent, WChildren,EChildren)
     
-    def best_split(data, labels):
-        return split
+    def best_split(self, data, labels):
+        labelsArray = np.array(labels)
 
-    def createTree(root):
-        
-        if Entropy(root.labels) == 0 :
+        # print(data)
+        # print(labels, "\n")
+        # print(labelsArray)
+
+        feature = "Income"
+        unique_values = data[feature].unique()
+        for value in unique_values:
+            subset_indices = data[feature] == value
+            print(data[feature])
+            print(subset_indices)
+            # parentEntropy = self.Entropy(labelsArray)
+            # weights_children = len(data[subset_indices]) / len(data)
+            # childrenEntropy = self.Entropy(labels[subset_indices])
+            # print(parentEntropy)
+            # print(childrenEntropy)
+        print("next value\n")
+        # for feature in data.columns:
+        #     unique_values = data[feature].unique()
+        #     for value in unique_values:
+        #         subset_indices = data[feature] == value
+        #         parentEntropy = self.Entropy(labelsArray)
+        #         weights_children = len(data[subset_indices]) / len(data)
+        #         childrenEntropy = self.Entropy(labels[subset_indices])
+        #         print(parentEntropy)
+        #         print(childrenEntropy)
+        #     print("next value\n")
+
+
+
+    def createTree(self, data, label):
+        # bebim mitoni ba label beri inja 
+        if self.Entropy(root.labels) == 0 :
             return
         
-        split = best_split(root.data, root.labels)
+        # man injori niaz daram
+        split = self.best_split(data, label)
+        
         rightNode = TNode()
         leftNode = TNode()
         root.right = rightNode
@@ -64,10 +67,11 @@ class Tree:
         root.labels = labels
 
         rightNode.data = split.less
-        createTree(rightNode)
+        self.createTree(rightNode)
         
         leftNode.data = split.more
-        createTree(leftNode)
+        self.createTree(leftNode)
         
         return
+
 

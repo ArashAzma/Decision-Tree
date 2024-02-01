@@ -1,22 +1,14 @@
 import numpy as np 
+from Tree import Tree
 import pandas as pd 
 from functions import entropy
 
+# inaro ham tagheer bede adresesho 
+dfFeature = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_train.csv', nrows=10)
+dfLabel = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\label_train.csv', nrows=10)
 
-# print('start')
-# df = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_train.csv')
-# print(df.head())
+data = dfFeature
+label = dfLabel['Diabetes_012']
 
-# duplicate_rows_data = df[df.duplicated()]
-# # pak kardn duplicates as dataset
-# df = df.drop_duplicates()
-
-# for column in df.columns:
-#     num_distinct_values = len(df[column].unique())
-#     print(f"{column}: {num_distinct_values} distinct values")
-
-# print('end')
-
-h = ['m', 'm', 'm', 'f']
-
-print(entropy(h))
+tree = Tree()
+tree.createTree(data, label)
