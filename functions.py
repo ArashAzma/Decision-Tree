@@ -48,7 +48,7 @@ def informationGain(data, labels):
     
     for x in range (0,len(dataTypes)-1) :
         datalabels = []
-        for y in range (0, len (data) - 1):         # 0 ya 1 ro motmaen nistm (bastegi dare)
+        for y in range (0, len (data) - 1):         
             if(data[y] == dataTypes[x]):
                 percents[x] += 1
                 datalabels.append(labels[y])
