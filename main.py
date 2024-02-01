@@ -5,18 +5,14 @@ from functions import entropy
 from functions import informationGain
 
 # inaro ham tagheer bede adresesho 
-#dfFeature = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_train.csv', nrows=10)
-#dfLabel = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\label_train.csv', nrows=10)
+dfFeature = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\feature_train.csv', nrows=10)
+dfLabel = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\label_train.csv', nrows=10)
 
-#data = dfFeature
-#label = dfLabel['Diabetes_012']
+data = dfFeature
+label = dfLabel['Diabetes_012']
 
 #tree = Tree()
 #tree.createTree(data, label)
 
-label = ["no", "no", "yes", "yes", "yes"]
-
-data = ["w", "s", "w", "s", "w"]
-
-s = informationGain(label, data)
+s = informationGain(data["Income"], label)
 print(s)
