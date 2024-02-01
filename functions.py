@@ -26,37 +26,32 @@ def entropy(labels):
             
     return -ent  
 
-
-
-
-
-
 def informationGain(data, labels):
-    dataTypes = data.unique()
+    uniqueValues = data.unique()
 
     # data frames to 1d array
     dataArray = np.array(data)
     labelsArray = np.array(labels)
 
-    g = entropy(labelsArray)
-    dataTypes = []
-    percents = []
-    dataEntropy = []
-    i = 0
+    parentEntropy = entropy(labelsArray)
+    percents = np.zeros(len(uniqueValues))
+    dataEntropy = np.zeros(len(uniqueValues))
     
     #finding child entropies and number of each data type
-    
-    for x in range (0,len(dataTypes)-1) :
-        datalabels = []
-        for y in range (0, len (dataArray) - 1):         # 0 ya 1 ro motmaen nistm (bastegi dare)
-            if(dataArray[y] == dataTypes[x]):
-                percents[x] += 1
-                datalabels.append(labelsArray[y])
-        dataEntropy[x] = entropy(datalabels)
-    
-    ###
+    for index, value in enumerate(uniqueValues):
+        subset_indices = data == value
+        subsetArray = np.array(subset_indices)
+        trueCount = np.sum(subsetArray)
+        percents[index] = trueCount/len(subsetArray)
         
-    for x in range (0, len(dataTypes)-1) :
-        g-=(percents[x]/len(labelsArray))*dataEntropy[x]
+        datalabels = [labelsArray[i] for i, subIndex in enumerate(subsetArray) if subIndex]
+        dataEntropy[index] = entropy(datalabels)
     
-    return g
+    print('parentEntropy', parentEntropy)
+    print('percents', percents)
+    print('dataEntropy', dataEntropy)
+    gain = parentEntropy
+    for x in uniqueValues :
+        gain-=(percents[x]/len(labelsArray)) * dataEntropy[x]
+    
+    return gain
