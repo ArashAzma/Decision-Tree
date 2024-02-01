@@ -30,25 +30,19 @@ def entropy(labels):
 
 
 
-def informationGain(labels, data):
-    g = entropy(labels)
+def informationGain(data, labels):
+    dataTypes = data.unique()
+
+    # data frames to 1d array
+    dataArray = np.array(data)
+    labelsArray = np.array(labels)
+
+    g = entropy(labelsArray)
     dataTypes = []
     percents = []
     dataEntropy = []
     i = 0
     
-    # finding data types
-    for x in data :
-        found = False
-        for y in dataTypes :
-            if(x == y) :
-                found = True
-                break
-            else :
-                i+=1
-        if(not found) :
-            dataTypes[i] = x
-    ###
     
     #finding child entropies and number of each data type
     
