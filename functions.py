@@ -29,10 +29,7 @@ def entropy(labels):
 def informationGain(data, labels):
     uniqueValues = data.unique()
 
-    # data frames to 1d array
-    dataArray = np.array(data)
     labelsArray = np.array(labels)
-
     parentEntropy = entropy(labelsArray)
     percents = np.zeros(len(uniqueValues))
     dataEntropy = np.zeros(len(uniqueValues))
@@ -47,11 +44,14 @@ def informationGain(data, labels):
         datalabels = [labelsArray[i] for i, subIndex in enumerate(subsetArray) if subIndex]
         dataEntropy[index] = entropy(datalabels)
     
-    print('parentEntropy', parentEntropy)
-    print('percents', percents)
-    print('dataEntropy', dataEntropy)
+    # print('labelsArray', labelsArray)
+    # print('uniqueValues', uniqueValues)
+    # print('percents', percents)
+    # print('dataEntropy', dataEntropy)
     gain = parentEntropy
-    for x in uniqueValues :
-        gain-=(percents[x]/len(labelsArray)) * dataEntropy[x]
+    
+    # print('gain', gain)
+    for index, value in enumerate(uniqueValues):
+        gain -= percents[index]* dataEntropy[index]
     
     return gain
