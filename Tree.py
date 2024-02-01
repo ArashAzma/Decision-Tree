@@ -3,10 +3,9 @@ import numpy as np
 import pandas as pd
 from functions import entropy, informationGain
 
-
 class Tree:
     # constructure
-    def __init__(self, depth=None):
+    def __init__(self, depth=10):
         self.depth = depth
         self.root = Node()
 
@@ -32,14 +31,14 @@ class Tree:
         return best_feature_name
 
 
-    def createTree(self, data, label, root = None):
+    def createTree(self, data, label, root = None, current_depth=0):
 
         if root is None: 
             root = self.root
 
         labelsArray = np.array(label)
-        print(self.Entropy(labelsArray))
-        if self.Entropy(labelsArray) == 0: 
+
+        if self.Entropy(labelsArray) == 0 or current_depth == self.depth: 
             return
 
         bestSplitColumnName = self.best_split(data, label)
@@ -65,7 +64,7 @@ class Tree:
                 node = Node(dataSubset, labelSubset, bestSplitColumnName, value)
                 label_subset_df = pd.DataFrame({'label': labelSubset})
                 data_subset_df = pd.DataFrame(dataSubset, columns=droppedColumnData.columns)
-                self.createTree(data_subset_df, label_subset_df['label'], node)
+                self.createTree(data_subset_df, label_subset_df['label'], node, current_depth + 1)
 
     def isLeafNode(self, label):
         return self.Entropy(label) == 0
