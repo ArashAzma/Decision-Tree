@@ -20,11 +20,14 @@ class Node:
         
 class LeafNode:
     #leaf node
+
     def __init__(self, value, label=None):
         self.value = value
         
         self.label = label if label is not None else {}
         
+        self.isFeature = False
+
         self.isLeaf = True
     def whoami(self):
          return (type(self).__name__)

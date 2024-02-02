@@ -1,3 +1,4 @@
+import turtle
 from Node import Node, LeafNode
 import numpy as np
 import pandas as pd
@@ -13,6 +14,49 @@ class Tree:
     def Entropy(labels):
        return entropy(labels)
     
+    def drawRectangle(width, value, attribute, x, y):
+        pen = turtle.Turtle()
+        pen.hideturtle()
+        pen.penup()
+        pen.setx(x)
+        pen.sety(y)
+        pen.pendown()
+        for i in range(4):
+            pen.forward(width)
+            pen.right(90)
+        pen.write(value)
+        pen.up()
+        pen.sety(y - width/2)
+        pen.setx(x + width/4)
+        pen.down
+        pen.write(attribute)
+            
+    def movePen(x1, y1, x2, y2, width):
+        pen = turtle.Turtle()
+        pen.hideturtle()
+        pen.up()
+        pen.setx(x1 + width/2)
+        pen.sety(y1 - width)
+        pen.down()
+        pen.setpos(x2+width/2, y2)
+        
+
+    def drawTree(depth , root, x, y, width, screenWidth, screenHeight) :
+        
+        dy = screenHeight/depth
+        turtle.screensize(canvwidth=screenWidth, canvheight=screenHeight, bg="white") 
+        if root.isFeature or not root.isLeaf :
+            Tree.drawRectangle(width, root.value, root.featureName, x, y)
+            dx = (screenWidth-50)/len(root.children)
+            for i in range(0, len(root.children)-1):
+                x0 = x-100+10*i
+                Tree.movePen(x, y, x0+60*i , y-dy,width)
+                Tree.drawTree(depth, root.children[i],x0+60*i,y-dy,width,screenWidth,screenHeight)
+        
+        elif root.isLeaf :
+            Tree.drawRectangle(width, root.value, "" , x, y)
+    
+
     @staticmethod
     def iGain(data, labels):
         return informationGain(data, labels)
