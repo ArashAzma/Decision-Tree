@@ -34,7 +34,8 @@ class Tree:
     def createTree(self, data, label, root = None, current_depth=0):
 
         if root is None: 
-            root = self.root
+            root = Node(data, label)
+            self.root = root
 
         labelsArray = np.array(label)
 
@@ -44,6 +45,8 @@ class Tree:
         bestSplitColumnName = self.best_split(data, label)
         uniqueValues = data[bestSplitColumnName].unique()
         
+        root.featureName = bestSplitColumnName
+
         for value in uniqueValues:
             subset_indices = data[bestSplitColumnName] == value
             subsetArray = np.array(subset_indices)
@@ -55,15 +58,17 @@ class Tree:
             labelSubset = [labelsArray[i] for i, subIndex in enumerate(subsetArray) if subIndex]
             dataSubset = [dataArray[i] for i, subIndex in enumerate(subsetArray) if subIndex]
 
+
             if(self.isLeafNode(labelSubset)):
-                node = LeafNode(labelSubset[0], value)
-                root.children.append(node)
+                node = LeafNode(value, labelSubset[0])
             
             else:
-                node = Node(dataSubset, labelSubset, bestSplitColumnName, value)
+                node = Node(dataSubset, labelSubset, "", value)
                 label_subset_df = pd.DataFrame({'label': labelSubset})
                 data_subset_df = pd.DataFrame(dataSubset, columns=droppedColumnData.columns)
                 self.createTree(data_subset_df, label_subset_df['label'], node, current_depth + 1)
+
+            root.children.append(node)
 
     def isLeafNode(self, label):
         return self.Entropy(label) == 0

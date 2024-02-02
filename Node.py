@@ -18,7 +18,7 @@ class Node:
         
 class LeafNode:
     #leaf node
-    def __init__(self, label=None, value= -1):
+    def __init__(self, value, label=None):
         self.value = value
         
         self.label = label if label is not None else {}
