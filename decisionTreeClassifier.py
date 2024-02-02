@@ -6,7 +6,7 @@ class decisionTreeClassifier:
         self.tree = Tree(depth=self.max_depth)
         self.decisionTree = self.tree.createTree(data, labels)
 
-    def predictAll(self, data, depth=10):
+    def predictAll(self, data):
         dataArray = np.array(data)
         predictions = []
         i=0
@@ -20,6 +20,9 @@ class decisionTreeClassifier:
         root = self.tree.root
 
         while(predictedLabel == None):
+            if root.featureName == '':
+                predictedLabel = 0
+                continue
             columnValue = data[root.featureName]      
             selectedNode = None
             
@@ -38,3 +41,14 @@ class decisionTreeClassifier:
                 root = selectedNode
         return predictedLabel
 
+    def accuracy(self, predictedLabels, labels):
+        i = 0
+        correctPredictionCount = 0  
+        while(i<len(labels)):
+            if(predictedLabels[i] == labels[i]):
+                correctPredictionCount+=1
+            i+=1
+
+        accuracy_value = correctPredictionCount/len(labels)
+
+        return accuracy_value

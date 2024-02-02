@@ -5,7 +5,7 @@ from functions import entropy, informationGain
 
 class Tree:
     # constructure
-    def __init__(self, depth=10):
+    def __init__(self, depth=20):
         self.depth = depth
         self.root = Node()
 
