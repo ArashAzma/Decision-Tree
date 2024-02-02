@@ -15,6 +15,8 @@ class Node:
         for child in self.children:
             ret += child.__str__(level + 1)
         return ret
+    def whoami(self):
+         return (type(self).__name__)
         
 class LeafNode:
     #leaf node
@@ -24,3 +26,5 @@ class LeafNode:
         self.label = label if label is not None else {}
         
         self.isLeaf = True
+    def whoami(self):
+         return (type(self).__name__)

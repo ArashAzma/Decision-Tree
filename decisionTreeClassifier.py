@@ -1,4 +1,3 @@
-from Node import Node, LeafNode
 from Tree import Tree
 
 class decisionTreeClassifier:
@@ -8,9 +7,22 @@ class decisionTreeClassifier:
         self.decisionTree = self.tree.createTree(data, labels)
 
     def predict(self, data):
-        print('self.tree.root.children', self.tree.root.children)
-        print('self.tree.root.children', self.tree.root.children[0].label)
-        print('self.tree.root.featureName', self.tree.root.featureName)
-        # print(self.tree.root)
-        # Implement prediction logic using the trained tree
-        pass
+        predictedLabel = None
+        root = self.tree.root
+
+        while(predictedLabel == None):
+            columnValue = data[root.featureName]      
+            selectedNode = None
+            
+            for childRoot in root.children:
+                if(childRoot.value == columnValue):
+                    selectedNode = childRoot
+                    break
+            nodeType = selectedNode.whoami()
+
+            if(nodeType == 'LeafNode'):
+                predictedLabel = selectedNode.label
+            elif(nodeType == 'Node'):
+                root = selectedNode
+        return predictedLabel
+
