@@ -3,24 +3,21 @@ from decisionTreeClassifier import decisionTreeClassifier
 import pandas as pd 
 import numpy as np 
 
-dfFeature = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_train.csv', nrows=100)
-dfLabel = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\label_train.csv', nrows=100)
+dfFeature = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_train.csv', nrows=500)
+dfLabel = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\label_train.csv', nrows=500)
 
-# dfFeature = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\Iris.csv')
+dfTest = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_test.csv', nrows=3)
 
-# data = dfFeature.drop("Id", axis=1)
-# data = data.drop("Species", axis=1)
-# label = dfFeature['Species']
+dataDF = pd.concat([dfFeature, dfLabel], axis=1)
+dataDF = dataDF.drop_duplicates()
 
-data = dfFeature
-label = dfLabel['Diabetes_012']
+data = dataDF.drop('Diabetes_012', axis=1)
+label = dataDF['Diabetes_012']
 
+test = dfTest
 
-# tree = Tree(10)
-# tree.createTree(data, label)
-i = 0
-while True:
-    firstRow = data.iloc[i]
-    dsc = decisionTreeClassifier(data, label)
-    print(dsc.predict(firstRow))
-    i+=1
+print('training...')
+dsc = decisionTreeClassifier(data, label)
+print('done')
+
+print('predictions', dsc.predictAll(test))
