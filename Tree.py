@@ -5,7 +5,7 @@ from functions import entropy, informationGain
 
 class Tree:
     # constructure
-    def __init__(self, depth=20):
+    def __init__(self, depth=10):
         self.depth = depth
         self.root = Node()
 
@@ -30,8 +30,7 @@ class Tree:
 
         return best_feature_name
 
-
-    def createTree(self, data, label, root = None, current_depth=0):
+    def createTree(self, data, label, root = None):
 
         if root is None: 
             root = Node(data, label)
@@ -39,7 +38,7 @@ class Tree:
 
         labelsArray = np.array(label)
 
-        if self.Entropy(labelsArray) == 0 or current_depth == self.depth: 
+        if self.Entropy(labelsArray) == 0 or data.empty or label.empty: 
             return
 
         bestSplitColumnName = self.best_split(data, label)
@@ -61,14 +60,15 @@ class Tree:
 
             if(self.isLeafNode(labelSubset)):
                 node = LeafNode(value, labelSubset[0])
+                root.children.append(node)  
             
             else:
                 node = Node(dataSubset, labelSubset, "", value)
                 label_subset_df = pd.DataFrame({'label': labelSubset})
                 data_subset_df = pd.DataFrame(dataSubset, columns=droppedColumnData.columns)
-                self.createTree(data_subset_df, label_subset_df['label'], node, current_depth + 1)
+                root.children.append(node)
+                self.createTree(data_subset_df, label_subset_df['label'], node)
 
-            root.children.append(node)
 
     def isLeafNode(self, label):
         return self.Entropy(label) == 0
