@@ -44,10 +44,6 @@ def informationGain(data, labels):
         datalabels = [labelsArray[i] for i, subIndex in enumerate(subsetArray) if subIndex]
         dataEntropy[index] = entropy(datalabels)
     
-    # print('labelsArray', labelsArray)
-    # print('uniqueValues', uniqueValues)
-    # print('percents', percents)
-    # print('dataEntropy', dataEntropy)
     gain = parentEntropy
     
     # print('gain', gain)

@@ -76,17 +76,17 @@ class randomForest:
         percents = []
         max = 0
 
-        for x in predictions:
+        for i in range (0, len(predictions)) :
             found = False
             j = 0
-            for y in outputs:
-                if y == x:
+            for i in range (0, len(outputs)) :
+                if predictions[i] == outputs[j] :
                     percents[j] += 1
                     found = True
                     break
                 j += 1
             if not found:
-                outputs.append(x)
+                outputs.append(predictions[i])
                 percents.append(1)
                 i += 1
 
@@ -96,3 +96,25 @@ class randomForest:
                 max = x
         
         return outputs[max]
+    
+    def accuracy(self, predictedLabels, labels):
+        i = 0
+        correctPredictionCount = 0  
+        while(i<len(labels)):
+            if(predictedLabels[i] == labels[i]):
+                correctPredictionCount+=1
+            i+=1
+
+        accuracy_value = correctPredictionCount/len(labels)
+
+        return accuracy_value
+    
+    def predictAll(self, data, depth=None):
+        dataArray = np.array(data)
+        predictions = []
+        
+        i=0
+        while i< len(dataArray):
+            predictions.append(self.predict(data.iloc[i], depth))
+            i+=1
+        return predictions

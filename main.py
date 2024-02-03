@@ -6,14 +6,14 @@ import pandas as pd
 import numpy as np 
 
 
-dfFeature = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_train.csv', nrows=50)
-dfLabel = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\label_train.csv', nrows=50)
+dfFeature = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\feature_train.csv', nrows=50)
+dfLabel = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\label_train.csv', nrows=50)
 
-dfTest = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\feature_test.csv')
+dfTest = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\feature_test.csv')
 
 dataDF = pd.concat([dfFeature, dfLabel], axis=1)
 
-dfTestLabel = pd.read_csv('D:\\Downloads\\UNI 3\\Data Structure\\Decision Tree\\dataset\\label_test.csv')
+dfTestLabel = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\label_test.csv')
 
 dataDF = dataDF.drop_duplicates()
 
@@ -27,7 +27,9 @@ test = dfTest
 #print(label)
 
 randTree = randomForest(20, dataDF)
-randTree.predictRandomForest(test.iloc[1])
+print(randTree.predictRandomForest(test.iloc[1]))
+
+
 
 
 # print('done')
