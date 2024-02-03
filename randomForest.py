@@ -118,4 +118,15 @@ class randomForest:
         accuracy_value = correctPredictionCount/len(labels)
 
         return accuracy_value
+    def labelWithHighestPercentage(self, arr):
+        count_dict = {}
+
+        for num in arr:
+            if num in count_dict:
+                count_dict[num] += 1
+            else:
+                count_dict[num] = 1
+
+        label = max(count_dict, key=count_dict.get)
+        return label
     
