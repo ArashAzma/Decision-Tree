@@ -97,6 +97,16 @@ class randomForest:
         
         return outputs[max]
     
+    def predictAll(self, data, depth=None):
+        dataArray = np.array(data)
+        predictions = []
+        
+        i=0
+        while i< len(dataArray):
+            predictions.append(self.predictRandomForest(data.iloc[i], depth))
+            i+=1
+        return predictions
+    
     def accuracy(self, predictedLabels, labels):
         i = 0
         correctPredictionCount = 0  
@@ -109,12 +119,3 @@ class randomForest:
 
         return accuracy_value
     
-    def predictAll(self, data, depth=None):
-        dataArray = np.array(data)
-        predictions = []
-        
-        i=0
-        while i< len(dataArray):
-            predictions.append(self.predict(data.iloc[i], depth))
-            i+=1
-        return predictions

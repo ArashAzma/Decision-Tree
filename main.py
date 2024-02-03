@@ -22,23 +22,19 @@ label = dataDF['Diabetes_012']
 
 test = dfTest
 
-# print('training...')
-# dsc = decisionTreeClassifier(data, label)
-#print(label)
-
+print('training...')
+dsc = decisionTreeClassifier(data, label)
 randTree = randomForest(20, dataDF)
-print(randTree.predictRandomForest(test.iloc[1]))
+print('done')
+
+predictions = randTree.predictAll(test)
+print('random forest', randTree.accuracy(predictions, np.array(dfTestLabel)))
+
+predictions2 = dsc.predictAll(test)
+accuracy2 = dsc.accuracy(predictions2, np.array(dfTestLabel))
+print('decision tree', accuracy2)
 
 
-
-
-# print('done')
-
-# predictions = dsc.predictAll(test)
-
-# accuracy = dsc.accuracy(predictions, np.array(dfTestLabel))
-
-# print('accuracy', accuracy)
 
 # screen = turtle.Screen()
 # screen.setup(2200, 700)
