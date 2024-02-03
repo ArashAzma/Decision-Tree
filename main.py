@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np 
 
 
-dfFeature = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\feature_train.csv', nrows=50)
-dfLabel = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\label_train.csv', nrows=50)
+dfFeature = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\feature_train.csv', nrows=30)
+dfLabel = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\label_train.csv' , nrows=30)
 
 dfTest = pd.read_csv('C:\\Users\\ASUS\\Desktop\\dsFinal\\Decision-Tree\\dataset\\feature_test.csv')
 
@@ -23,16 +23,16 @@ label = dataDF['Diabetes_012']
 test = dfTest
 
 print('training...')
-dsc = decisionTreeClassifier(data, label)
-randTree = randomForest(20, dataDF)
+#dsc = decisionTreeClassifier(data, label)
+randTree = randomForest(10, dataDF, 0.7)
 print('done')
 
-predictions = randTree.predictAll(test)
-print('random forest', randTree.accuracy(predictions, np.array(dfTestLabel)))
+# predictions = randTree.predictAll(test, 3)
+# print('random forest', randTree.accuracy(predictions, np.array(dfTestLabel)))
 
-predictions2 = dsc.predictAll(test)
-accuracy2 = dsc.accuracy(predictions2, np.array(dfTestLabel))
-print('decision tree', accuracy2)
+# predictions2 = dsc.predictAll(test, 3)
+# accuracy2 = dsc.accuracy(predictions2, np.array(dfTestLabel))
+# print('decision tree', accuracy2)
 
 
 

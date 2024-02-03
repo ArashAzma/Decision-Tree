@@ -16,6 +16,7 @@ class randomForest:
         
         for i in range (0, self.treeCount):
             randomDataset = self.dataset.sample(sampleSize)
+            print(randomDataset.head())
             randomData = randomDataset.drop('Diabetes_012', axis=1)
             randomLabels = randomDataset['Diabetes_012']
             
