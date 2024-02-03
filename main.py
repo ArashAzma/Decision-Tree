@@ -19,7 +19,7 @@ test = dfTest
 
 print('training...')
 dsc = decisionTreeClassifier(data, label)
-print(label)
+#print(label)
 print('done')
 
 #predictions = dsc.predictAll(test)
