@@ -47,6 +47,41 @@ class Tree:
         turtle.screensize(canvwidth=screenWidth, canvheight=screenHeight, bg="white") 
         if root.isFeature or not root.isLeaf :
             Tree.drawRectangle(width, root.value, root.featureName, x, y)
+                
+            outputs = []
+            percents = []
+
+            for xx in root.labels:
+                found = False
+                j = 0
+                for yy in outputs:
+                    if yy == xx:
+                        percents[j] += 1
+                        found = True
+                        break
+                    j += 1
+                if not found:
+                    outputs.append(xx)
+                    percents.append(1)
+                    
+                colors = ["pink", "red", "green", "blue", "yellow"]
+                pen = turtle.Turtle()
+                xPos = x
+                yPos = y
+                pen.up()
+                pen.setpos(x, y)
+                pen.hideturtle()
+                pen.speed(0)
+                for j in range (0,len(outputs)) :
+                    pen.fillcolor(colors[j])
+                    for i in range(0, percents[j]):
+                        xPos += 10
+                        pen.begin_fill()
+                        pen.setpos(xPos, yPos)
+                        pen.down()
+                        pen.circle(3)
+                        pen.end_fill()
+                        pen.up()
             dx = (screenWidth-50)/len(root.children)
             for i in range(0, len(root.children)-1):
                 x0 = x-100+10*i
@@ -55,6 +90,37 @@ class Tree:
         
         elif root.isLeaf :
             Tree.drawRectangle(width, root.value, "" , x, y)
+            for xx in root.labels:
+                found = False
+                j = 0
+                for yy in outputs:
+                    if yy == xx:
+                        percents[j] += 1
+                        found = True
+                        break
+                    j += 1
+                if not found:
+                    outputs.append(xx)
+                    percents.append(1)
+                    
+                colors = ["pink", "red", "green", "blue", "yellow"]
+                pen = turtle.Turtle()
+                xPos = x
+                yPos = y
+                pen.up()
+                pen.setpos(x, y)
+                pen.hideturtle()
+                pen.speed(0)
+                for j in range (0,len(outputs) - 1) :
+                    pen.fillcolor(colors[j])
+                    for i in range(0, percents[j] - 1):
+                        xPos += 10
+                        pen.begin_fill()
+                        pen.setpos(xPos, yPos)
+                        pen.down()
+                        pen.circle(3)
+                        pen.end_fill()
+                        pen.up()
     
 
     @staticmethod
