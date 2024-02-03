@@ -19,6 +19,7 @@ test = dfTest
 
 print('training...')
 dsc = decisionTreeClassifier(data, label)
+print(label)
 print('done')
 
 #predictions = dsc.predictAll(test)
@@ -29,4 +30,6 @@ print('done')
 
 screen = turtle.Screen()
 screen.setup(2200, 700)
-Tree.drawTree(dsc.tree.depth, dsc.tree.root,0, 250 , 40, 2200, 700)
+outputs = []
+colors = ["pink", "red", "green", "blue", "yellow"]
+Tree.drawTree(dsc.tree.depth, dsc.tree.root,0, 250 , 40, 2200, 700, colors, outputs)
