@@ -3,7 +3,7 @@ import numpy as np
 class decisionTreeClassifier:
     def __init__(self, data, labels):
         self.tree = Tree()
-        self.decisionTree = self.tree.createTree(data, labels)
+        self.tree.createTree(data, labels)
 
     def predictAll(self, data, depth=None):
         dataArray = np.array(data)
@@ -41,7 +41,7 @@ class decisionTreeClassifier:
                     break
 
             if(selectedNode== None):
-                predictedLabel = -1
+                predictedLabel = 0
                 continue
 
             nodeType = selectedNode.whoami()

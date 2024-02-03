@@ -10,11 +10,6 @@ class Node:
         self.children = []
         
         self.isFeature = True
-    def __str__(self, level=0):
-        ret = "\t" * level + f"Node: {self.feature_name} = {self.value}\n"
-        for child in self.children:
-            ret += child.__str__(level + 1)
-        return ret
     def whoami(self):
          return (type(self).__name__)
         

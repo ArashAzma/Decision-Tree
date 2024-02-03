@@ -108,7 +108,6 @@ class Tree:
                 pen.end_fill()
                 pen.up()
                 
-
     @staticmethod
     def iGain(data, labels):
         return informationGain(data, labels)
