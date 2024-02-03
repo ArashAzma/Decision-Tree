@@ -21,10 +21,11 @@ class Node:
 class LeafNode:
     #leaf node
 
-    def __init__(self, value, label=None):
+    def __init__(self, value, label=None, labelLength=0):
         self.value = value
         
         self.label = label if label is not None else {}
+        self.labelLength = labelLength
         
         self.isFeature = False
 

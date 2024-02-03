@@ -169,7 +169,7 @@ class Tree:
 
 
             if(self.isLeafNode(labelSubset)):
-                node = LeafNode(value, labelSubset[0])
+                node = LeafNode(value, labelSubset[0], len(labelSubset))
                 root.children.append(node)  
             
             else:
